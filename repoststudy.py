@@ -1,3 +1,4 @@
+import os.path
 import numpy as np
 import queries
 from NButils import *
@@ -54,10 +55,12 @@ def reposts_query(feed):
 data = {}
 
 for feed in feeds:
-    data[feed] = netizenbase2numpy(reposts_query(feed),reposts_columns, save_as="%d_repost_data" % (feed))
+    fname = "%d_repost_data.npy" % (feed)
 
-    #TODO: implement caching check
-    data[feed] = np.load("%d_repost_data.npy" % (feed))
+    if os.path.isfile(fname):    
+        data[feed] = np.load("%d_repost_data.npy" % (feed))
+    else:
+        data[feed] = netizenbase2numpy(reposts_query(feed),reposts_columns, save_as="%d_repost_data" % (feed))
 
     # clean out entries with 0 followers
     data[feed] = data[feed][data[feed].all(1)]
