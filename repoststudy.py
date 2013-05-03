@@ -36,7 +36,7 @@ reposts_columns = [#"feed_id",
                    "followers_count", 
                    "reposts_count"]
 
-feeds = [ 3417617421261823, 
+feeds = [ #3417617421261823, 
           3552114468781517,
           3552406165618962,
           3553002100625578,
@@ -99,22 +99,25 @@ plt.show()
 
 fig = plt.figure()
 for feed in feeds:
-    plt.plot(data[feed][:,0],data[feed][:,1])
+    plt.plot(data[feed][:,0],data[feed][:,1], label=str(feed))
 plt.title("Number of followers of reposters over time")
 plt.xlabel("time")
 #plt.xscale('log')
 plt.ylabel("number of reposts")
 plt.yscale('log')
+plt.legend()
 plt.show()
 
 fig = plt.figure()
 for feed in feeds:
-    plt.plot(data[feed][:,0],data[feed][:,2])
+    plt.plot(data[feed][:,0],data[feed][:,2],'o',label=str(feed))
+    
 plt.title("Number of reposts over time")
 plt.xlabel("time")
 #plt.xscale('log')
 plt.ylabel("number of reposts")
 plt.yscale('log')
+plt.legend()
 plt.show()
 
 #plt.hist(np.log10(repost_data[:,2]),50)
@@ -127,9 +130,10 @@ for feed in feeds:
 
 fig = plt.figure()
 for feed in feeds:
-    plt.plot(data[feed][:,0],flow[feed])
+    plt.plot(data[feed][:,0],flow[feed],label=str(feed))
 plt.title("flow through plot over time")
 plt.yscale('log')
+plt.legend()
 plt.show()
 
 #plt.hist(np.log10(flow_through),50)
