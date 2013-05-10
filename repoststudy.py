@@ -78,7 +78,7 @@ plt.xlabel("users")
 plt.xscale('log')
 plt.ylabel("followers")
 plt.yscale('log')
-plt.show()
+#plt.show()
 
 #plt.hist(np.log10(repost_data[:,1]),50)
 #plt.title("histogram of log followers  per repost")
@@ -88,25 +88,27 @@ plt.show()
 #plt.show()
 fig = plt.figure()
 for feed in feeds:
-    plt.plot(np.sort(data[feed][:,2])[::-1])
+    plt.plot(np.sort(data[feed][:,2])[::-1],'o')
 plt.title("Repost count distribution, log/log")
+plt.xlim(xmax=5000)
 plt.xlabel("users")
 plt.xscale('log')
+#plt.ylim(ymax=1000)
 plt.ylabel("reposts")
 plt.yscale('log')
-plt.show()
+#plt.show()
 
 
 fig = plt.figure()
 for feed in feeds:
-    plt.plot(data[feed][:,0],data[feed][:,1], label=str(feed))
+    plt.plot(data[feed][:,0], data[feed][:,1], label=str(feed))
 plt.title("Number of followers of reposters over time")
 plt.xlabel("time")
 #plt.xscale('log')
-plt.ylabel("number of reposts")
+plt.ylabel("followers")
 plt.yscale('log')
 plt.legend()
-plt.show()
+#plt.show()
 
 fig = plt.figure()
 for feed in feeds:
@@ -118,7 +120,7 @@ plt.xlabel("time")
 plt.ylabel("number of reposts")
 plt.yscale('log')
 plt.legend()
-plt.show()
+#plt.show()
 
 #plt.hist(np.log10(repost_data[:,2]),50)
 #plt.title("histogram of log reposts through rates per repost")
@@ -134,11 +136,15 @@ for feed in feeds:
 plt.title("flow through plot over time")
 plt.yscale('log')
 plt.legend()
-plt.show()
-
-#plt.hist(np.log10(flow_through),50)
-#plt.title("histogram of log flow through rates per repost")
 #plt.show()
+
+fig = plt.figure()
+for feed in feeds:
+    plt.hist(np.log10(flow[feed]),50) #, histtype='bar')
+plt.title("histogram of log flow through rates per repost")
+plt.xlabel("log flow rate")
+plt.ylabel("number of reposts")
+plt.show()
 
 fig = plt.figure()
 for feed in feeds:
@@ -147,6 +153,7 @@ plt.xlabel('num followers')
 plt.xscale('log')
 plt.ylabel('num reposts')
 plt.yscale('log')
+
 plt.show()
 
 
