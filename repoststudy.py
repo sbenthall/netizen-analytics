@@ -52,18 +52,23 @@ feeds = [ #3417617421261823,
 def reposts_query(feed):
     return """SELECT %s FROM seeding_repost INNER JOIN seeding_wbuser ON seeding_repost.wbuser_id=seeding_wbuser.wbuserid WHERE feed_id=%d ORDER BY createts;""" % (", ".join(reposts_columns), feed)
 
-data = {}
 
-for feed in feeds:
-    fname = "%d_repost_data.npy" % (feed)
+def load_repost_data(feeds):
+    data = {}
+    for feed in feeds:
+        fname = "%d_repost_data.npy" % (feed)
 
-    if os.path.isfile(fname):    
-        data[feed] = np.load("%d_repost_data.npy" % (feed))
-    else:
-        data[feed] = netizenbase2numpy(reposts_query(feed),reposts_columns, save_as="%d_repost_data" % (feed))
+        if os.path.isfile(fname):
+            data[feed] = np.load("%d_repost_data.npy" % (feed))
+        else:
+            data[feed] = netizenbase2numpy(reposts_query(feed),reposts_columns, save_as="%d_repost_data" % (feed))
 
-    # clean out entries with 0 followers
-    data[feed] = data[feed][data[feed].all(1)]
+            # clean out entries with 0 followers
+            data[feed] = data[feed][data[feed].all(1)]
+
+    return data
+
+data = load_repost_data(feeds)
 
 #plt.hist(numpy.log10(repost_data[:,1]),50)
 #plt.show()
