@@ -11,7 +11,7 @@ foo = np.ones((1,1))
 #estimating for each repost the likelihood
 #that any other entry was its parent
 
-def reconstruct_lineage(reposts):
+def reconstruct_lineage_forward(reposts):
     n = reposts.shape[0] # number of reposts
     recorded_reposts = np.sum(reposts[:,2]);
 
@@ -59,7 +59,7 @@ def reconstruct_lineage(reposts):
     return lineage
 
 for k,d in data.items():
-    lineage = reconstruct_lineage(d)
+    lineage = reconstruct_lineage_forward(d)
     lineages.append(lineage)
     #print(lineage)
     print(k)
