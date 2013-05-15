@@ -141,20 +141,20 @@ for k,d in data.items():
     descendents = lineage_descendents(lineage)
     fig = plt.figure()
     ax1 = fig.add_subplot(111)
-    ax1.plot(depths,'bo')
+    ax1.plot(depths,'bo',label="Depth")
     ax1.set_xlabel('Chronologically ordered posts')
-    ax1.set_ylabel('Expected depths',color='b')
+    ax1.set_ylabel('Expected depth',color='b')
     for tl in ax1.get_yticklabels():
         tl.set_color('b')
 
     ax2 = ax1.twinx()
-    ax2.plot(descendents,'r.')
-    ax2.plot(d[:,2],'g.')
-    ax2.set_ylabel('Expected total descendents',color='r')
+    ax2.plot(descendents,'r.',label="Expected descendents")
+    ax2.plot(d[:,2],'g.',label="Recorded reposts")
+    ax2.set_ylabel('Number of posts',color='r')
     ax2.set_yscale('log')
+    ax2.legend(loc=3)
     for tl in ax2.get_yticklabels():
         tl.set_color('r')
-
     plt.show()
 
 
