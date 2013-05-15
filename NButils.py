@@ -77,7 +77,6 @@ feeds = [ #3417617421261823,
 def reposts_query(feed):
     return """SELECT %s FROM seeding_repost INNER JOIN seeding_wbuser ON seeding_repost.wbuser_id=seeding_wbuser.wbuserid WHERE feed_id=%d ORDER BY createts;""" % (", ".join(reposts_columns), feed)
 
-
 def load_repost_data(feeds):
     data = {}
     for feed in feeds:
@@ -92,3 +91,5 @@ def load_repost_data(feeds):
             data[feed] = data[feed][data[feed].all(1)]
 
     return data
+
+    
